@@ -1,3 +1,4 @@
+import {authenticate} from '@loopback/authentication';
 import {
   Count,
   CountSchema,
@@ -7,23 +8,24 @@ import {
   Where,
 } from '@loopback/repository';
 import {
-  post,
-  param,
+  del,
   get,
   getModelSchemaRef,
+  param,
   patch,
+  post,
   put,
-  del,
   requestBody,
   response,
 } from '@loopback/rest';
 import {Requirement} from '../models';
 import {RequirementRepository} from '../repositories';
 
+@authenticate('jwt')
 export class RequirementController {
   constructor(
     @repository(RequirementRepository)
-    public requirementRepository : RequirementRepository,
+    public requirementRepository: RequirementRepository,
   ) {}
 
   @post('/requirements')
@@ -106,7 +108,8 @@ export class RequirementController {
   })
   async findById(
     @param.path.string('id') id: string,
-    @param.filter(Requirement, {exclude: 'where'}) filter?: FilterExcludingWhere<Requirement>
+    @param.filter(Requirement, {exclude: 'where'})
+    filter?: FilterExcludingWhere<Requirement>,
   ): Promise<Requirement> {
     return this.requirementRepository.findById(id, filter);
   }

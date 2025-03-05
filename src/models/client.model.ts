@@ -1,4 +1,6 @@
-import {Entity, model, property} from '@loopback/repository';
+import {Entity, hasMany, model, property} from '@loopback/repository';
+import {Property} from './property.model';
+import {Requirement} from './requirement.model';
 
 @model({settings: {strict: false}})
 export class Client extends Entity {
@@ -16,10 +18,14 @@ export class Client extends Entity {
 
   @property({
     type: 'string',
-    default: ',
   })
   contact?: string;
 
+  @hasMany(() => Property)
+  properties: Property[];
+
+  @hasMany(() => Requirement)
+  requirements: Requirement[];
   // Define well-known properties here
 
   // Indexer property to allow additional data

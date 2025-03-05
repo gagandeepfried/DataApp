@@ -39,6 +39,10 @@ export class Requirement extends Entity {
   })
   facing?: string;
 
+  @property({
+    type: 'string',
+  })
+  clientId?: string;
   // Define well-known properties here
 
   // Indexer property to allow additional data

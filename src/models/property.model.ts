@@ -45,6 +45,10 @@ export class Property extends Entity {
   })
   price?: number;
 
+  @property({
+    type: 'string',
+  })
+  clientId?: string;
   // Define well-known properties here
 
   // Indexer property to allow additional data
